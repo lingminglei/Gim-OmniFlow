@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.lml</groupId>
+    <artifactId>gim-ai-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>gim-ai-server</name>
+    <description>gim ai parent</description>
+
+    <modules>
+        <module>gim-common-service</module>
+        <module>gim-api-service</module>
+        <module>gim-app-service</module>
+        <module>gim-gateway-service</module>
+        <module>gim-business-service</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+
+        <dubbo.version>3.2.10</dubbo.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-security-crypto.version>5.5.0</spring-security-crypto.version>
+        <rocketmq.stream.version>2021.0.5.0</rocketmq.stream.version>
+
+        <commons-io.version>2.16.0</commons-io.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <hutool.version>5.8.16</hutool.version>
+        <lombok.version>1.18.30</lombok.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
+        <sa-token.version>1.36.0</sa-token.version>
+
+        <minio.version>8.5.7</minio.version>
+        <okhttp.version>4.12.0</okhttp.version>
+        <poi.version>5.2.3</poi.version>
+        <xmlbeans.version>5.1.1</xmlbeans.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <fastjson2.version>2.0.53</fastjson2.version>
+        <javacv.version>1.5.8</javacv.version>
+        <tess4j.version>5.4.0</tess4j.version>
+        <pdfbox.version>2.0.29</pdfbox.version>
+        <tika.version>2.9.0</tika.version>
+        <jaudiotagger.version>2.0.3</jaudiotagger.version>
+        <ufop.version>1.2.8</ufop.version>
+        <langchain4j.version>1.1.0</langchain4j.version>
+        <langchain4j.beta.version>1.1.0-beta7</langchain4j.beta.version>
+        <langchain4j.experimental.version>1.0.0-beta1</langchain4j.experimental.version>
+        <qdrant.testcontainers.version>1.19.6</qdrant.testcontainers.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <caffeine.version>3.1.8</caffeine.version>
+        <zxing.version>3.3.3</zxing.version>
+        <mysql.version>8.0.26</mysql.version>
+        <freemarker.version>2.3.28</freemarker.version>
+        <druid.version>1.2.20</druid.version>
+        <redisson.version>3.16.0</redisson.version>
+        <sensitive-logback.version>1.7.0</sensitive-logback.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 导入 Spring Cloud BOM，统一管理 Spring Cloud 相关组件版本。 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 导入 Spring Cloud Alibaba BOM，统一管理 Nacos、Sentinel、RocketMQ 等组件版本。 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 内部 API 模块，提供各服务共享的接口定义。 -->
+            <dependency>
+                <groupId>org.lml</groupId>
+                <artifactId>gim-api-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 内部公共模块，提供通用返回对象、枚举和工具类。 -->
+            <dependency>
+                <groupId>org.lml</groupId>
+                <artifactId>gim-common-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 内部 AI 服务模块，供应用服务复用 AI 能力。 -->
+            <dependency>
+                <groupId>org.lml</groupId>
+                <artifactId>gim-ai-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Lombok 用于减少 Getter、Builder、日志字段等样板代码。 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- Dubbo 启动器，用于提供 RPC 服务暴露和服务消费能力。 -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!-- Dubbo Nacos 注册中心集成，用于服务注册与发现。 -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!-- Spring Security Crypto，提供 BCrypt 等密码加密工具。 -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-crypto</artifactId>
+                <version>${spring-security-crypto.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 启动器，用于基于 Servlet 的认证与会话管理。 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token Reactor 启动器，用于 Gateway 场景下的响应式认证处理。 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Sa-Token Redis 集成，用于将 token 和 session 状态持久化到 Redis。 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- Hutool 工具包，提供字符串、日期、文件、HTTP、集合等通用工具。 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- Commons IO，提供项目中通用的文件与流操作工具。 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
+            <!-- Commons Lang，提供字符串、数字、对象等基础工具方法。 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!-- MyBatis-Plus 启动器，用于 ORM 集成和 Mapper 能力支持。 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- MyBatis-Plus 注解包，用于公共实体模型上的注解定义。 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- MyBatis-Plus 代码生成器，用于生成持久层样板代码。 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+
+            <!-- MapStruct，用于在编译期生成对象映射代码。 -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <!-- RocketMQ Stream 启动器，用于支持 Spring Cloud Stream 与 RocketMQ 集成。 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+                <version>${rocketmq.stream.version}</version>
+            </dependency>
+
+            <!-- MinIO Java SDK，用于对象存储相关操作。 -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+
+            <!-- OkHttp，用于调用第三方服务的 HTTP 接口。 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <!-- Apache POI，用于读写 Excel 等 Office 文档。 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!-- XMLBeans，是 Apache POI 解析 OOXML 文档结构时所需的依赖。 -->
+            <dependency>
+                <groupId>org.apache.xmlbeans</groupId>
+                <artifactId>xmlbeans</artifactId>
+                <version>${xmlbeans.version}</version>
+            </dependency>
+
+            <!-- Fastjson，用于兼容历史 JSON 序列化与反序列化逻辑。 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- Fastjson2，用于新的 JSON 处理逻辑。 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <!-- JavaCV，集成原生媒体处理和图像处理能力。 -->
+            <dependency>
+                <groupId>org.bytedeco</groupId>
+                <artifactId>javacv-platform</artifactId>
+                <version>${javacv.version}</version>
+            </dependency>
+
+            <!-- Tess4J，用于集成 Tesseract OCR 文本识别能力。 -->
+            <dependency>
+                <groupId>net.sourceforge.tess4j</groupId>
+                <artifactId>tess4j</artifactId>
+                <version>${tess4j.version}</version>
+            </dependency>
+
+            <!-- PDFBox，用于解析和处理 PDF 文档。 -->
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+
+            <!-- Apache Tika Core，用于识别文档类型并提取元数据。 -->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+
+            <!-- Apache Tika 解析器扩展包，用于提供具体文档解析能力。 -->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers-standard-package</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+
+            <!-- Jaudiotagger，用于读取音频文件的元数据。 -->
+            <dependency>
+                <groupId>org</groupId>
+                <artifactId>jaudiotagger</artifactId>
+                <version>${jaudiotagger.version}</version>
+            </dependency>
+
+            <!-- UFOP 启动器，用于提供统一的文件存储抽象。 -->
+            <dependency>
+                <groupId>com.qiwenshare</groupId>
+                <artifactId>ufop-spring-boot-starter</artifactId>
+                <version>${ufop.version}</version>
+            </dependency>
+
+            <!-- LangChain4j easy-rag，用于提供高层封装的 RAG 能力。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-easy-rag</artifactId>
+                <version>${langchain4j.beta.version}</version>
+            </dependency>
+
+            <!-- LangChain4j Qdrant 集成，用于将向量数据存储到 Qdrant。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-qdrant</artifactId>
+                <version>${langchain4j.beta.version}</version>
+            </dependency>
+
+            <!-- All-MiniLM 向量模型包，用于提供本地 Embedding 模型实现。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-embeddings-all-minilm-l6-v2</artifactId>
+                <version>${langchain4j.beta.version}</version>
+            </dependency>
+
+            <!-- LangChain4j MCP 支持，用于集成 Model Context Protocol 客户端。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-mcp</artifactId>
+                <version>${langchain4j.experimental.version}</version>
+            </dependency>
+
+            <!-- LangChain4j Anthropic 支持，用于集成 Anthropic 模型服务。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-anthropic</artifactId>
+                <version>${langchain4j.experimental.version}</version>
+            </dependency>
+
+            <!-- LangChain4j OpenAI 支持，用于集成兼容 OpenAI 协议的模型接口。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-open-ai</artifactId>
+                <version>${langchain4j.version}</version>
+            </dependency>
+
+            <!-- LangChain4j 核心包，用于提供聊天模型编排相关抽象。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j</artifactId>
+                <version>${langchain4j.version}</version>
+            </dependency>
+
+            <!-- LangChain4j Core，用于提供更底层的 Prompt 和模型基础能力。 -->
+            <dependency>
+                <groupId>dev.langchain4j</groupId>
+                <artifactId>langchain4j-core</artifactId>
+                <version>${langchain4j.version}</version>
+            </dependency>
+
+            <!-- Qdrant Testcontainers 模块，用于本地或测试阶段快速启动向量数据库。 -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>qdrant</artifactId>
+                <version>${qdrant.testcontainers.version}</version>
+            </dependency>
+
+            <!-- Apache HttpClient，用于兼容部分历史 HTTP 调用逻辑。 -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+
+            <!-- Caffeine，用于提供本地内存缓存能力。 -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+
+            <!-- ZXing Core，用于二维码和条形码的编码解码。 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+
+            <!-- ZXing JavaSE 扩展，用于二维码图片生成等桌面端辅助能力。 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+
+            <!-- MySQL JDBC 驱动，用于连接 MySQL 数据库。 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!-- Freemarker，用于代码生成等模板渲染场景。 -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <!-- Druid，用于提供数据库连接池实现。 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- Redisson Spring 启动器，用于将 Redisson 集成到 Spring Boot。 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- Redisson 核心包，用于分布式锁和 Redis 客户端能力。 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- Sensitive Logback，用于对日志中的敏感字段进行脱敏。 -->
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>sensitive-logback</artifactId>
+                <version>${sensitive-logback.version}</version>
+            </dependency>
+
+<!--            阿里巴巴- TTL 线程池 “线程池环境下，父线程的变量如何传递给子线程” 的问题。-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>2.14.5</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- 统一管理所有子模块的编译插件版本。 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

@@ -1,0 +1,1696 @@
+:root,
+html[data-theme='light'] {
+  --apple-bg: #f5f5f7;
+  --apple-surface: #ffffff;
+  --apple-surface-elevated: rgba(255, 255, 255, 0.72);
+  --apple-surface-soft: rgba(255, 255, 255, 0.58);
+  --apple-text-primary: #1d1d1f;
+  --apple-text-secondary: #86868b;
+  --apple-divider: rgba(0, 0, 0, 0.05);
+  --apple-divider-strong: rgba(0, 0, 0, 0.08);
+  --apple-blue: #007aff;
+  --apple-blue-soft: rgba(0, 122, 255, 0.12);
+  --apple-hover: rgba(0, 0, 0, 0.04);
+  --apple-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --apple-shadow-lg: 0 20px 60px rgba(15, 23, 42, 0.12);
+  --apple-shadow-inset: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --apple-glass-bg: rgba(255, 255, 255, 0.7);
+  --apple-input-bg: rgba(255, 255, 255, 0.88);
+  --apple-radius-xl: 20px;
+  --apple-radius-md: 10px;
+  --apple-radius-pill: 24px;
+  --apple-backdrop: blur(20px) saturate(180%);
+}
+
+html[data-theme='dark'] {
+  --apple-bg: #000000;
+  --apple-surface: #1c1c1e;
+  --apple-surface-elevated: rgba(28, 28, 30, 0.78);
+  --apple-surface-soft: rgba(255, 255, 255, 0.06);
+  --apple-text-primary: #f5f5f7;
+  --apple-text-secondary: #a1a1a6;
+  --apple-divider: rgba(255, 255, 255, 0.1);
+  --apple-divider-strong: rgba(255, 255, 255, 0.14);
+  --apple-blue: #007aff;
+  --apple-blue-soft: rgba(10, 132, 255, 0.18);
+  --apple-hover: rgba(255, 255, 255, 0.08);
+  --apple-shadow: 0 8px 30px rgba(0, 0, 0, 0.26);
+  --apple-shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.45);
+  --apple-shadow-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --apple-glass-bg: rgba(28, 28, 30, 0.72);
+  --apple-input-bg: rgba(44, 44, 46, 0.92);
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--apple-bg);
+  color: var(--apple-text-primary);
+  transition: background-color 0.28s ease, color 0.28s ease;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(0, 122, 255, 0.16);
+}
+
+body::-webkit-scrollbar,
+.el-scrollbar__wrap::-webkit-scrollbar,
+.main-view-content::-webkit-scrollbar,
+.conversation-body::-webkit-scrollbar,
+.nav-scroll::-webkit-scrollbar,
+.workspace-canvas::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body::-webkit-scrollbar-thumb,
+.el-scrollbar__wrap::-webkit-scrollbar-thumb,
+.main-view-content::-webkit-scrollbar-thumb,
+.conversation-body::-webkit-scrollbar-thumb,
+.nav-scroll::-webkit-scrollbar-thumb,
+.workspace-canvas::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--apple-divider-strong);
+}
+
+body::-webkit-scrollbar-track,
+.el-scrollbar__wrap::-webkit-scrollbar-track,
+.main-view-content::-webkit-scrollbar-track,
+.conversation-body::-webkit-scrollbar-track,
+.nav-scroll::-webkit-scrollbar-track,
+.workspace-canvas::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+#app {
+  min-height: 100vh;
+  color: var(--apple-text-primary);
+}
+
+.el-button,
+.el-input__inner,
+.el-textarea__inner,
+.el-select .el-input__inner,
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .el-pager li,
+.el-radio-button__inner,
+.el-checkbox__inner,
+.el-input-number,
+.el-tag,
+.el-message,
+.el-notification,
+.el-card,
+.el-dropdown-menu,
+.el-select-dropdown,
+.el-popover {
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.el-button {
+  border: none !important;
+  border-radius: var(--apple-radius-md) !important;
+  box-shadow: var(--apple-shadow) !important;
+  background: var(--apple-surface-elevated) !important;
+  color: var(--apple-text-primary) !important;
+}
+
+.el-button:hover,
+.el-button:focus {
+  background: var(--apple-hover) !important;
+}
+
+.el-button--primary {
+  background: var(--apple-blue) !important;
+  color: #ffffff !important;
+}
+
+.el-button--primary:hover,
+.el-button--primary:focus {
+  background: #0a84ff !important;
+}
+
+.el-button--danger {
+  background: #ff453a !important;
+  color: #ffffff !important;
+}
+
+.el-button--text {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--apple-blue) !important;
+}
+
+.el-input__inner,
+.el-textarea__inner {
+  border: none !important;
+  border-radius: var(--apple-radius-md) !important;
+  background: var(--apple-input-bg) !important;
+  color: var(--apple-text-primary) !important;
+  box-shadow: var(--apple-shadow-inset), var(--apple-shadow) !important;
+}
+
+.el-textarea__inner {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+.el-input__inner::placeholder,
+.el-textarea__inner::placeholder {
+  color: var(--apple-text-secondary) !important;
+}
+
+.el-input__prefix,
+.el-input__suffix,
+.el-input__icon,
+.el-select .el-input .el-select__caret {
+  color: var(--apple-text-secondary) !important;
+}
+
+.el-input-number {
+  border: none !important;
+  background: var(--apple-input-bg) !important;
+  border-radius: var(--apple-radius-md) !important;
+  box-shadow: var(--apple-shadow-inset), var(--apple-shadow) !important;
+}
+
+.el-select-dropdown,
+.el-dropdown-menu,
+.el-popover,
+.el-picker-panel,
+.el-tooltip__popper,
+.el-autocomplete-suggestion,
+.docs-operation-dropdown {
+  border: none !important;
+  border-radius: 16px !important;
+  background: var(--apple-surface-elevated) !important;
+  box-shadow: var(--apple-shadow-lg) !important;
+  backdrop-filter: var(--apple-backdrop);
+  color: var(--apple-text-primary) !important;
+}
+
+.el-select-dropdown__item,
+.el-dropdown-menu__item,
+.el-picker-panel__shortcut,
+.el-autocomplete-suggestion li {
+  color: var(--apple-text-primary) !important;
+}
+
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover,
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover,
+.el-autocomplete-suggestion li:hover {
+  background: var(--apple-blue-soft) !important;
+}
+
+.el-dialog {
+  border: none !important;
+  border-radius: var(--apple-radius-xl) !important;
+  background: var(--apple-surface-elevated) !important;
+  box-shadow: var(--apple-shadow-lg) !important;
+  backdrop-filter: var(--apple-backdrop);
+  overflow: hidden;
+}
+
+.el-dialog__header {
+  padding: 22px 24px 0 !important;
+}
+
+.el-dialog__title,
+.el-form-item__label {
+  color: var(--apple-text-primary) !important;
+}
+
+.el-dialog__body {
+  color: var(--apple-text-primary) !important;
+}
+
+.el-card {
+  border: none !important;
+  border-radius: var(--apple-radius-xl) !important;
+  background: var(--apple-surface) !important;
+  box-shadow: var(--apple-shadow) !important;
+}
+
+.el-table {
+  background: transparent !important;
+  color: var(--apple-text-primary) !important;
+}
+
+.el-table,
+.el-table__expanded-cell,
+.el-table th.el-table__cell,
+.el-table tr,
+.el-table td.el-table__cell {
+  background: transparent !important;
+}
+
+.el-table::before,
+.el-table--border::after,
+.el-table--group::after,
+.el-table--border::before {
+  display: none !important;
+}
+
+.el-table th.el-table__cell,
+.el-table td.el-table__cell {
+  border-bottom: 1px solid var(--apple-divider) !important;
+}
+
+.el-table th.el-table__cell {
+  color: var(--apple-text-secondary) !important;
+  font-weight: 600 !important;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell,
+.el-table__body tr.current-row > td.el-table__cell,
+.el-table__body tr.hover-row > td.el-table__cell {
+  background: var(--apple-blue-soft) !important;
+}
+
+.el-table__body-wrapper,
+.el-table__header-wrapper {
+  background: transparent !important;
+}
+
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .el-pager li {
+  min-width: 34px;
+  height: 34px;
+  line-height: 34px;
+  border: none !important;
+  border-radius: 12px !important;
+  background: var(--apple-surface-elevated) !important;
+  color: var(--apple-text-primary) !important;
+  box-shadow: var(--apple-shadow) !important;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background: var(--apple-blue) !important;
+  color: #ffffff !important;
+}
+
+.el-menu,
+.el-menu-item,
+.el-submenu__title,
+.el-tabs__item,
+.el-radio,
+.el-checkbox {
+  color: var(--apple-text-primary) !important;
+}
+
+.el-menu {
+  background: transparent !important;
+  border-right: none !important;
+}
+
+.el-menu-item,
+.el-submenu__title {
+  border-radius: 14px !important;
+}
+
+.el-menu-item:hover,
+.el-submenu__title:hover {
+  background: var(--apple-hover) !important;
+}
+
+.el-menu-item.is-active {
+  background: var(--apple-blue-soft) !important;
+  color: var(--apple-blue) !important;
+}
+
+.el-tabs__nav-wrap::after,
+.el-divider {
+  background-color: var(--apple-divider) !important;
+}
+
+.el-tabs__active-bar {
+  background-color: var(--apple-blue) !important;
+}
+
+.el-radio-button__inner,
+.el-radio__inner,
+.el-checkbox__inner {
+  border-color: var(--apple-divider-strong) !important;
+  background: var(--apple-input-bg) !important;
+}
+
+.el-radio__input.is-checked .el-radio__inner,
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner,
+.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+  background: var(--apple-blue) !important;
+  border-color: var(--apple-blue) !important;
+}
+
+.el-radio__label,
+.el-checkbox__label,
+.el-empty__description p,
+.el-descriptions__label,
+.el-descriptions__body,
+.el-form-item__content,
+.el-collapse-item__header,
+.el-collapse-item__wrap {
+  color: var(--apple-text-primary) !important;
+}
+
+.el-loading-mask {
+  background: rgba(245, 245, 247, 0.54) !important;
+  backdrop-filter: blur(10px);
+}
+
+html[data-theme='dark'] .el-loading-mask {
+  background: rgba(0, 0, 0, 0.42) !important;
+}
+
+.el-message,
+.el-notification {
+  border: none !important;
+  border-radius: 16px !important;
+  background: var(--apple-surface-elevated) !important;
+  color: var(--apple-text-primary) !important;
+  backdrop-filter: var(--apple-backdrop);
+}
+
+html[data-theme] .docs-page,
+html[data-theme] .ai-page,
+html[data-theme] .order-page,
+html[data-theme] .knowledge-page,
+html[data-theme] .main-container,
+html[data-theme] .toolkit-wrapper,
+html[data-theme] .user-dashboard-wrapper,
+html[data-theme] .ice-wrapper,
+html[data-theme] .login-view-container,
+html[data-theme] .settings-page {
+  color: var(--apple-text-primary) !important;
+}
+
+html[data-theme] .docs-page,
+html[data-theme] .ai-page,
+html[data-theme] .order-page,
+html[data-theme] .knowledge-page,
+html[data-theme] .main-container,
+html[data-theme] .toolkit-wrapper,
+html[data-theme] .user-dashboard-wrapper,
+html[data-theme] .ice-wrapper {
+  background: transparent !important;
+}
+
+html[data-theme] .toolkit-wrapper {
+  min-height: auto !important;
+}
+
+html[data-theme] .card-glow,
+html[data-theme] .tech-bg-overlay,
+html[data-theme] .tech-bg {
+  opacity: 0.35 !important;
+  filter: blur(40px) !important;
+}
+
+html[data-theme] .session-sidebar,
+html[data-theme] .conversation-shell,
+html[data-theme] .conversation-header,
+html[data-theme] .knowledge-hero,
+html[data-theme] .knowledge-summary-card,
+html[data-theme] .knowledge-library-shell,
+html[data-theme] .knowledge-detail-shell,
+html[data-theme] .knowledge-card,
+html[data-theme] .knowledge-list-empty,
+html[data-theme] .detail-empty-card,
+html[data-theme] .knowledge-file-shell,
+html[data-theme] .file-table-shell,
+html[data-theme] .welcome-card,
+html[data-theme] .composer-card,
+html[data-theme] .message-card,
+html[data-theme] .streaming-card,
+html[data-theme] .docs-sidebar,
+html[data-theme] .sidebar-brand,
+html[data-theme] .sidebar-panel,
+html[data-theme] .capacity-card,
+html[data-theme] .workspace-hero,
+html[data-theme] .workspace-shell,
+html[data-theme] .workspace-toolbar,
+html[data-theme] .workspace-breadcrumb,
+html[data-theme] .order-hero,
+html[data-theme] .summary-card,
+html[data-theme] .order-shell,
+html[data-theme] .order-card,
+html[data-theme] .detail-panel,
+html[data-theme] .package-item,
+html[data-theme] .qr-step,
+html[data-theme] .order-confirm,
+html[data-theme] .dashboard-header,
+html[data-theme] .stat-card,
+html[data-theme] .announcement-section,
+html[data-theme] .model-section,
+html[data-theme] .tool-card,
+html[data-theme] .ice-toolbar,
+html[data-theme] .ice-canvas,
+html[data-theme] .floating-toolbar,
+html[data-theme] .sora-capsule-panel,
+html[data-theme] .modal-content-floating,
+html[data-theme] .operation-menu-wrapper,
+html[data-theme] .file-table-wrapper,
+html[data-theme] .file-grid-wrapper,
+html[data-theme] .image-timeline-wrapper,
+html[data-theme] .img-preview-wrapper,
+html[data-theme] .video-preview-wrapper,
+html[data-theme] .audio-preview-wrapper,
+html[data-theme] .playlist-sidebar,
+html[data-theme] .login-card-wrapper,
+html[data-theme] .captcha-img-box,
+html[data-theme] .user-info-card,
+html[data-theme] .model-card {
+  background: var(--apple-surface) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow) !important;
+  color: var(--apple-text-primary) !important;
+}
+
+html[data-theme] .session-sidebar,
+html[data-theme] .conversation-header,
+html[data-theme] .docs-sidebar,
+html[data-theme] .workspace-toolbar,
+html[data-theme] .workspace-breadcrumb,
+html[data-theme] .login-card-wrapper,
+html[data-theme] .ice-toolbar {
+  background: var(--apple-glass-bg) !important;
+  backdrop-filter: var(--apple-backdrop);
+}
+
+html[data-theme] .user-details .meta-item,
+html[data-theme] .announcement-content .date,
+html[data-theme] .model-advantage,
+html[data-theme] .hero-desc,
+html[data-theme] .summary-foot,
+html[data-theme] .timeline-label,
+html[data-theme] .session-preview,
+html[data-theme] .tool-label,
+html[data-theme] .welcome-text,
+html[data-theme] .sidebar-label,
+html[data-theme] .sidebar-summary,
+html[data-theme] .summary-line span,
+html[data-theme] .goods-id,
+html[data-theme] .amount-sub,
+html[data-theme] .stream-text,
+html[data-theme] .tool-card p,
+html[data-theme] .tool-card .tag,
+html[data-theme] .brand-copy p {
+  color: var(--apple-text-secondary) !important;
+}
+
+html[data-theme] .new-chat-btn,
+html[data-theme] .send-btn,
+html[data-theme] .refresh-btn,
+html[data-theme] .resume-btn,
+html[data-theme] .detail-btn,
+html[data-theme] .recharge-btn,
+html[data-theme] .small-tag,
+html[data-theme] .btn-generate-shiny {
+  border-radius: var(--apple-radius-md) !important;
+}
+
+html[data-theme] .composer-input,
+html[data-theme] .select-file-input .el-input__inner,
+html[data-theme] .search-box input {
+  border-radius: var(--apple-radius-pill) !important;
+  background: var(--apple-input-bg) !important;
+  color: var(--apple-text-primary) !important;
+  box-shadow: var(--apple-shadow-inset), var(--apple-shadow) !important;
+}
+
+html[data-theme] .search-box,
+html[data-theme] .select-file-input {
+  background: transparent !important;
+}
+
+html[data-theme] .session-item,
+html[data-theme] .sidebar-link,
+html[data-theme] .tool-group,
+html[data-theme] .order-pagination,
+html[data-theme] .nav-menu .el-menu-item,
+html[data-theme] .right-menu-item,
+html[data-theme] .unzip-item,
+html[data-theme] .audio-item,
+html[data-theme] .video-item,
+html[data-theme] .tool-wrapper .item,
+html[data-theme] .action-btn,
+html[data-theme] .theme-mode-option {
+  border-radius: 14px !important;
+}
+
+html[data-theme] .session-item:hover,
+html[data-theme] .sidebar-link:hover,
+html[data-theme] .tool-card:hover,
+html[data-theme] .order-card:hover,
+html[data-theme] .audio-item:hover,
+html[data-theme] .video-item:hover,
+html[data-theme] .right-menu-item:hover,
+html[data-theme] .unzip-item:hover,
+html[data-theme] .nav-menu .el-menu-item:hover {
+  background: var(--apple-hover) !important;
+}
+
+html[data-theme] .session-item.active,
+html[data-theme] .sidebar-link.is-active,
+html[data-theme] .video-item.is-active,
+html[data-theme] .audio-item.active,
+html[data-theme] .nav-menu .el-menu-item.is-active,
+html[data-theme] .status-chip,
+html[data-theme] .header-status {
+  background: var(--apple-blue-soft) !important;
+  color: var(--apple-blue) !important;
+}
+
+html[data-theme] .goods-tag,
+html[data-theme] .channel-chip,
+html[data-theme] .status-pill,
+html[data-theme] .small-tag,
+html[data-theme] .theme-mini-tag,
+html[data-theme] .model-type-tag {
+  border: none !important;
+  background: var(--apple-blue-soft) !important;
+  color: var(--apple-blue) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme] .order-card,
+html[data-theme] .tool-card,
+html[data-theme] .stat-card,
+html[data-theme] .model-card,
+html[data-theme] .summary-card,
+html[data-theme] .package-item {
+  border-radius: var(--apple-radius-xl) !important;
+  overflow: hidden;
+}
+
+html[data-theme] .tool-card .icon-wrapper,
+html[data-theme] .goods-avatar,
+html[data-theme] .message-avatar,
+html[data-theme] .brand-mark,
+html[data-theme] .welcome-badge,
+html[data-theme] .nav-icon {
+  box-shadow: none !important;
+  background: var(--apple-blue-soft) !important;
+  color: var(--apple-blue) !important;
+}
+
+html[data-theme] .workspace-canvas,
+html[data-theme] .conversation-body,
+html[data-theme] .session-list,
+html[data-theme] .nav-scroll,
+html[data-theme] .audio-list-body,
+html[data-theme] .video-list {
+  background: transparent !important;
+}
+
+html[data-theme] .right-menu-list,
+html[data-theme] .unzip-list {
+  border: none !important;
+  border-radius: 16px !important;
+  background: var(--apple-surface-elevated) !important;
+  box-shadow: var(--apple-shadow-lg) !important;
+  backdrop-filter: var(--apple-backdrop);
+  color: var(--apple-text-primary) !important;
+}
+
+html[data-theme] .img-preview-wrapper,
+html[data-theme] .video-preview-wrapper,
+html[data-theme] .audio-preview-wrapper {
+  backdrop-filter: blur(28px) saturate(180%);
+}
+
+html[data-theme] .knowledge-modal,
+html[data-theme] .knowledge-card-dropdown {
+  background: var(--apple-surface-elevated) !important;
+  color: var(--apple-text-primary) !important;
+  box-shadow: var(--apple-shadow-lg) !important;
+  backdrop-filter: var(--apple-backdrop);
+}
+
+html[data-theme] .knowledge-card-dropdown .el-dropdown-menu__item {
+  color: var(--apple-text-primary) !important;
+}
+
+html[data-theme] .knowledge-card-dropdown .el-dropdown-menu__item:hover,
+html[data-theme] .knowledge-card-dropdown .el-dropdown-menu__item:focus {
+  background: var(--apple-blue-soft) !important;
+}
+
+html[data-theme] .knowledge-card-dropdown .is-danger {
+  color: #ff453a !important;
+}
+
+html[data-theme='light'] .knowledge-page .hero-title,
+html[data-theme='light'] .knowledge-page .section-header h2,
+html[data-theme='light'] .knowledge-page .detail-copy h2,
+html[data-theme='light'] .knowledge-page .detail-empty-card h3,
+html[data-theme='light'] .knowledge-page .summary-value,
+html[data-theme='light'] .knowledge-page .knowledge-card .card-title,
+html[data-theme='light'] .knowledge-page .knowledge-file-shell h3,
+html[data-theme='light'] .knowledge-page .knowledge-file-table .cell,
+html[data-theme='light'] .knowledge-page .knowledge-file-table th,
+html[data-theme='light'] .knowledge-page .knowledge-file-table td,
+html[data-theme='light'] .knowledge-modal,
+html[data-theme='light'] .knowledge-modal .knowledge-modal__header h3,
+html[data-theme='light'] .knowledge-modal .el-form-item__label,
+html[data-theme='light'] .knowledge-modal .el-input__inner,
+html[data-theme='light'] .knowledge-modal .el-textarea__inner,
+html[data-theme='light'] .knowledge-modal .el-dialog__headerbtn .el-dialog__close {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .knowledge-page .hero-desc,
+html[data-theme='light'] .knowledge-page .section-header p,
+html[data-theme='light'] .knowledge-page .summary-label,
+html[data-theme='light'] .knowledge-page .summary-foot,
+html[data-theme='light'] .knowledge-page .detail-copy p,
+html[data-theme='light'] .knowledge-page .detail-metric span,
+html[data-theme='light'] .knowledge-page .detail-empty-card p,
+html[data-theme='light'] .knowledge-page .knowledge-card .card-desc,
+html[data-theme='light'] .knowledge-page .knowledge-card .meta-item,
+html[data-theme='light'] .knowledge-page .knowledge-list-empty .el-empty__description p,
+html[data-theme='light'] .knowledge-page .knowledge-file-shell p,
+html[data-theme='light'] .knowledge-page .file-name-copy small,
+html[data-theme='light'] .knowledge-page .file-empty-state .el-empty__description p,
+html[data-theme='light'] .knowledge-modal .knowledge-modal__header p,
+html[data-theme='light'] .knowledge-modal .knowledge-modal__kicker {
+  color: #6f7480 !important;
+}
+
+html[data-theme='dark'] .knowledge-page .hero-title,
+html[data-theme='dark'] .knowledge-page .section-header h2,
+html[data-theme='dark'] .knowledge-page .detail-copy h2,
+html[data-theme='dark'] .knowledge-page .detail-empty-card h3,
+html[data-theme='dark'] .knowledge-page .summary-value,
+html[data-theme='dark'] .knowledge-page .knowledge-card .card-title,
+html[data-theme='dark'] .knowledge-page .knowledge-file-shell h3,
+html[data-theme='dark'] .knowledge-modal,
+html[data-theme='dark'] .knowledge-modal .knowledge-modal__header h3,
+html[data-theme='dark'] .knowledge-modal .el-form-item__label,
+html[data-theme='dark'] .knowledge-modal .el-input__inner,
+html[data-theme='dark'] .knowledge-modal .el-textarea__inner,
+html[data-theme='dark'] .knowledge-modal .el-dialog__headerbtn .el-dialog__close {
+  color: #f5f5f7 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='dark'] .knowledge-page .hero-desc,
+html[data-theme='dark'] .knowledge-page .section-header p,
+html[data-theme='dark'] .knowledge-page .summary-label,
+html[data-theme='dark'] .knowledge-page .summary-foot,
+html[data-theme='dark'] .knowledge-page .detail-copy p,
+html[data-theme='dark'] .knowledge-page .detail-metric span,
+html[data-theme='dark'] .knowledge-page .detail-empty-card p,
+html[data-theme='dark'] .knowledge-page .knowledge-card .card-desc,
+html[data-theme='dark'] .knowledge-page .knowledge-card .meta-item,
+html[data-theme='dark'] .knowledge-page .knowledge-list-empty .el-empty__description p,
+html[data-theme='dark'] .knowledge-page .knowledge-file-shell p,
+html[data-theme='dark'] .knowledge-page .file-name-copy small,
+html[data-theme='dark'] .knowledge-page .file-empty-state .el-empty__description p,
+html[data-theme='dark'] .knowledge-modal .knowledge-modal__header p,
+html[data-theme='dark'] .knowledge-modal .knowledge-modal__kicker {
+  color: #a1a1a6 !important;
+}
+
+html[data-theme] .img-preview-wrapper .tip-wrapper,
+html[data-theme] .video-preview-wrapper .top-bar,
+html[data-theme] .audio-preview-wrapper .operate-box,
+html[data-theme] .audio-preview-wrapper .audio-list-wrapper {
+  background: transparent !important;
+}
+
+html[data-theme] .ice-node,
+html[data-theme] .ice-node-content,
+html[data-theme] .ice-node-contentBody,
+html[data-theme] .inSiderDiv,
+html[data-theme] .capsule-inner,
+html[data-theme] .type-selector-bar {
+  background: var(--apple-surface-elevated) !important;
+  border: none !important;
+  box-shadow: var(--apple-shadow) !important;
+  color: var(--apple-text-primary) !important;
+}
+
+html[data-theme] .ice-node-textarea,
+html[data-theme] .url-input,
+html[data-theme] .capsule-textarea {
+  background: var(--apple-input-bg) !important;
+  color: var(--apple-text-primary) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  box-shadow: var(--apple-shadow-inset) !important;
+}
+
+html[data-theme] .file-table-wrapper .el-table,
+html[data-theme] .file-table-wrapper .el-table__header-wrapper,
+html[data-theme] .file-table-wrapper .el-table__body-wrapper,
+html[data-theme] .file-grid-wrapper .file-list,
+html[data-theme] .image-timeline-wrapper .image-timeline-list {
+  background: transparent !important;
+}
+
+html[data-theme] .file-grid-wrapper .file-item,
+html[data-theme] .image-timeline-wrapper .image-item {
+  background: var(--apple-surface-soft) !important;
+  border: none !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+}
+
+html[data-theme] .file-grid-wrapper .file-item:hover,
+html[data-theme] .image-timeline-wrapper .image-item:hover,
+html[data-theme] .file-grid-wrapper .tech-active-item {
+  background: var(--apple-blue-soft) !important;
+}
+
+html[data-theme] .video-js,
+html[data-theme] .vjs-control-bar,
+html[data-theme] .vjs-big-play-button {
+  border-radius: 16px !important;
+}
+
+html[data-theme='light'] .video-js .vjs-control-bar {
+  background: rgba(255, 255, 255, 0.72) !important;
+}
+
+html[data-theme='dark'] .video-js .vjs-control-bar {
+  background: rgba(28, 28, 30, 0.82) !important;
+}
+
+html[data-theme='light'] .hljs,
+html[data-theme='light'] .message-content pre,
+html[data-theme='light'] .CodeMirror.cm-s-default {
+  background: #f8f8fb !important;
+  color: #1d1d1f !important;
+}
+
+html[data-theme='dark'] .hljs,
+html[data-theme='dark'] .message-content pre,
+html[data-theme='dark'] .CodeMirror.cm-s-default {
+  background: #101012 !important;
+  color: #f5f5f7 !important;
+}
+
+html[data-theme] .message-content pre,
+html[data-theme] .hljs,
+html[data-theme] .CodeMirror.cm-s-default {
+  border-radius: 16px !important;
+  box-shadow: var(--apple-shadow) !important;
+}
+
+html[data-theme] .toolkit-wrapper .tools-grid,
+html[data-theme] .user-dashboard-wrapper .stat-grid,
+html[data-theme] .order-page .summary-grid {
+  gap: 20px !important;
+}
+
+html[data-theme] .toolkit-wrapper .badge,
+html[data-theme] .user-dashboard-wrapper .recharge-btn,
+html[data-theme] .status-dot,
+html[data-theme] .status-pill .status-dot {
+  box-shadow: none !important;
+}
+
+html[data-theme] .toolkit-wrapper .search-box,
+html[data-theme] .ai-page .composer-card,
+html[data-theme] .docs-page .capacity-card,
+html[data-theme] .order-page .shell-footer,
+html[data-theme] .order-page .detail-header,
+html[data-theme] .main-container .card-header {
+  border-top: none !important;
+  border-bottom: 1px solid var(--apple-divider) !important;
+}
+
+html[data-theme] .main-container .card-header,
+html[data-theme] .order-page .shell-header,
+html[data-theme] .conversation-header,
+html[data-theme] .workspace-toolbar,
+html[data-theme] .top-bar,
+html[data-theme] .tip-wrapper {
+  border-bottom: 1px solid var(--apple-divider) !important;
+}
+
+html[data-theme] .captcha-placeholder,
+html[data-theme] .login-subtitle,
+html[data-theme] .welcome-kicker,
+html[data-theme] .header-kicker {
+  color: var(--apple-text-secondary) !important;
+}
+
+html[data-theme='dark'] .el-tooltip__popper,
+html[data-theme='dark'] .docs-operation-dropdown,
+html[data-theme='dark'] .el-dropdown-menu,
+html[data-theme='dark'] .el-select-dropdown,
+html[data-theme='dark'] .el-popover {
+  color: var(--apple-text-primary) !important;
+}
+
+@media (max-width: 1024px) {
+  .el-dialog {
+    width: calc(100vw - 24px) !important;
+    margin-top: 5vh !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html[data-theme] .session-sidebar,
+  html[data-theme] .docs-sidebar {
+    border-radius: 24px !important;
+  }
+
+  html[data-theme] .order-card,
+  html[data-theme] .tool-card,
+  html[data-theme] .summary-card,
+  html[data-theme] .package-item,
+  html[data-theme] .dashboard-header,
+  html[data-theme] .announcement-section,
+  html[data-theme] .model-section,
+  html[data-theme] .workspace-shell,
+  html[data-theme] .conversation-shell {
+    border-radius: 18px !important;
+  }
+}
+
+html[data-theme='light'] .toolkit-wrapper,
+html[data-theme='light'] .docs-page,
+html[data-theme='light'] .ai-page,
+html[data-theme='light'] .order-page,
+html[data-theme='light'] .user-dashboard-wrapper,
+html[data-theme='light'] .main-container,
+html[data-theme='light'] .ice-wrapper,
+html[data-theme='light'] .settings-page {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper {
+  background: linear-gradient(180deg, #eef3fb 0%, #f5f5f7 100%) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .toolkit-header {
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .header-content h1,
+html[data-theme='light'] .toolkit-wrapper .card-body h3,
+html[data-theme='light'] .toolkit-wrapper .emoji,
+html[data-theme='light'] .docs-page .hero-copy h1,
+html[data-theme='light'] .docs-page .nav-copy strong,
+html[data-theme='light'] .docs-page .capacity-metric strong,
+html[data-theme='light'] .ai-page .header-copy h1,
+html[data-theme='light'] .ai-page .session-title,
+html[data-theme='light'] .ai-page .message-role,
+html[data-theme='light'] .ai-page .message-content,
+html[data-theme='light'] .order-page .hero-copy h1,
+html[data-theme='light'] .order-page .summary-value,
+html[data-theme='light'] .order-page .goods-name,
+html[data-theme='light'] .order-page .amount-value,
+html[data-theme='light'] .order-page .detail-header h3,
+html[data-theme='light'] .order-page .detail-amount strong,
+html[data-theme='light'] .order-page .detail-item b,
+html[data-theme='light'] .user-dashboard-wrapper .user-name,
+html[data-theme='light'] .user-dashboard-wrapper .model-name,
+html[data-theme='light'] .user-dashboard-wrapper .stat-value,
+html[data-theme='light'] .main-container .header-title,
+html[data-theme='light'] .main-container .price-display,
+html[data-theme='light'] .main-container .footer-actions b,
+html[data-theme='light'] .main-container .qr-text p:first-child,
+html[data-theme='light'] .settings-page h1,
+html[data-theme='light'] .settings-page h2,
+html[data-theme='light'] .settings-page h3 {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+  text-shadow: none !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .subtitle,
+html[data-theme='light'] .toolkit-wrapper .card-body p,
+html[data-theme='light'] .toolkit-wrapper .tag,
+html[data-theme='light'] .toolkit-wrapper .arrow-icon,
+html[data-theme='light'] .docs-page .hero-copy p,
+html[data-theme='light'] .docs-page .nav-copy small,
+html[data-theme='light'] .docs-page .capacity-metric span,
+html[data-theme='light'] .docs-page .hero-stat span,
+html[data-theme='light'] .docs-page .workspace-pagination,
+html[data-theme='light'] .ai-page .summary-line span,
+html[data-theme='light'] .ai-page .summary-line strong,
+html[data-theme='light'] .ai-page .session-preview,
+html[data-theme='light'] .ai-page .welcome-kicker,
+html[data-theme='light'] .ai-page .welcome-text,
+html[data-theme='light'] .ai-page .tool-label,
+html[data-theme='light'] .order-page .hero-desc,
+html[data-theme='light'] .order-page .summary-label,
+html[data-theme='light'] .order-page .summary-foot,
+html[data-theme='light'] .order-page .goods-id,
+html[data-theme='light'] .order-page .amount-sub,
+html[data-theme='light'] .order-page .timeline-item,
+html[data-theme='light'] .order-page .stream-text,
+html[data-theme='light'] .order-page .shell-meta,
+html[data-theme='light'] .order-page .detail-item span,
+html[data-theme='light'] .order-page .time-node label,
+html[data-theme='light'] .user-dashboard-wrapper .user-intro,
+html[data-theme='light'] .user-dashboard-wrapper .meta-item,
+html[data-theme='light'] .user-dashboard-wrapper .announcement-content .text,
+html[data-theme='light'] .user-dashboard-wrapper .announcement-content .date,
+html[data-theme='light'] .user-dashboard-wrapper .model-advantage,
+html[data-theme='light'] .main-container .package-item p,
+html[data-theme='light'] .main-container .info-group,
+html[data-theme='light'] .main-container .qr-order-info,
+html[data-theme='light'] .main-container .countdown-text,
+html[data-theme='light'] .settings-page .hero-desc,
+html[data-theme='light'] .settings-page .theme-hint,
+html[data-theme='light'] .settings-page .theme-option-copy p,
+html[data-theme='light'] .settings-page .panel-item span {
+  color: #5f6370 !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .search-box input,
+html[data-theme='light'] .docs-page .workspace-toolbar .el-input__inner,
+html[data-theme='light'] .docs-page .workspace-pagination .el-input__inner,
+html[data-theme='light'] .docs-page .select-file-input .el-input__inner,
+html[data-theme='light'] .ai-page .toolbar-select .el-input__inner,
+html[data-theme='light'] .ai-page .composer-input,
+html[data-theme='light'] .main-container .el-input__inner,
+html[data-theme='light'] .login-view-container .el-input__inner,
+html[data-theme='light'] .settings-page .el-input__inner {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #1d1d1f !important;
+  border: 1px solid rgba(29, 29, 31, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .search-box input::placeholder,
+html[data-theme='light'] .docs-page .workspace-toolbar .el-input__inner::placeholder,
+html[data-theme='light'] .ai-page .composer-input::placeholder,
+html[data-theme='light'] .login-view-container .el-input__inner::placeholder {
+  color: #8b8f98 !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .tool-card,
+html[data-theme='light'] .docs-page .workspace-shell,
+html[data-theme='light'] .docs-page .sidebar-brand,
+html[data-theme='light'] .docs-page .sidebar-panel,
+html[data-theme='light'] .docs-page .workspace-hero,
+html[data-theme='light'] .docs-page .capacity-card,
+html[data-theme='light'] .ai-page .session-sidebar,
+html[data-theme='light'] .ai-page .conversation-shell,
+html[data-theme='light'] .ai-page .welcome-card,
+html[data-theme='light'] .ai-page .message-card,
+html[data-theme='light'] .ai-page .streaming-card,
+html[data-theme='light'] .ai-page .composer-card,
+html[data-theme='light'] .order-page .order-hero,
+html[data-theme='light'] .order-page .summary-card,
+html[data-theme='light'] .order-page .order-shell,
+html[data-theme='light'] .order-page .order-card,
+html[data-theme='light'] .order-page .detail-panel,
+html[data-theme='light'] .order-page .detail-card,
+html[data-theme='light'] .user-dashboard-wrapper .dashboard-header,
+html[data-theme='light'] .user-dashboard-wrapper .announcement-section,
+html[data-theme='light'] .user-dashboard-wrapper .model-section,
+html[data-theme='light'] .user-dashboard-wrapper .model-card,
+html[data-theme='light'] .main-container .el-card,
+html[data-theme='light'] .main-container .package-item,
+html[data-theme='light'] .main-container .order-confirm,
+html[data-theme='light'] .main-container .qr-step,
+html[data-theme='light'] .main-container .info-group,
+html[data-theme='light'] .main-container .tip-box,
+html[data-theme='light'] .main-container .qr-code-box,
+html[data-theme='light'] .main-container .qr-guide-box,
+html[data-theme='light'] .settings-page .settings-hero,
+html[data-theme='light'] .settings-page .settings-panel,
+html[data-theme='light'] .settings-page .theme-option,
+html[data-theme='light'] .ice-wrapper .ice-toolbar,
+html[data-theme='light'] .ice-wrapper .ice-canvas,
+html[data-theme='light'] .ice-wrapper .floating-toolbar,
+html[data-theme='light'] .ice-wrapper .sora-capsule-panel,
+html[data-theme='light'] .ice-wrapper .modal-content-floating,
+html[data-theme='light'] .ice-wrapper .ice-node,
+html[data-theme='light'] .ice-wrapper .capsule-inner,
+html[data-theme='light'] .upload-file-wrapper .file-panel,
+html[data-theme='light'] .right-menu-list,
+html[data-theme='light'] .img-preview-wrapper,
+html[data-theme='light'] .video-preview-wrapper,
+html[data-theme='light'] .audio-preview-wrapper,
+html[data-theme='light'] .el-dialog-div,
+html[data-theme='light'] .file-info-form {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid rgba(29, 29, 31, 0.06) !important;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .tool-card:hover,
+html[data-theme='light'] .docs-page .nav-menu .el-menu-item:hover,
+html[data-theme='light'] .ai-page .session-item:hover,
+html[data-theme='light'] .order-page .order-card:hover,
+html[data-theme='light'] .right-menu-item:hover,
+html[data-theme='light'] .unzip-item:hover,
+html[data-theme='light'] .audio-item:hover,
+html[data-theme='light'] .video-item:hover {
+  background: rgba(0, 122, 255, 0.08) !important;
+}
+
+html[data-theme='light'] .docs-page .nav-menu .el-menu-item,
+html[data-theme='light'] .ai-page .session-item,
+html[data-theme='light'] .file-grid-wrapper .file-item,
+html[data-theme='light'] .image-timeline-wrapper .image-item,
+html[data-theme='light'] .audio-item,
+html[data-theme='light'] .video-item,
+html[data-theme='light'] .panel-item {
+  background: rgba(245, 247, 252, 0.88) !important;
+  border: 1px solid rgba(29, 29, 31, 0.05) !important;
+}
+
+html[data-theme='light'] .docs-page .nav-menu .el-menu-item.is-active,
+html[data-theme='light'] .ai-page .session-item.active,
+html[data-theme='light'] .video-item.is-active,
+html[data-theme='light'] .audio-item.active {
+  background: rgba(0, 122, 255, 0.14) !important;
+  border-color: rgba(0, 122, 255, 0.2) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .tag,
+html[data-theme='light'] .order-page .channel-chip,
+html[data-theme='light'] .order-page .status-chip,
+html[data-theme='light'] .user-dashboard-wrapper .small-tag,
+html[data-theme='light'] .settings-page .theme-badge {
+  background: rgba(0, 122, 255, 0.1) !important;
+  color: #007aff !important;
+  border: 1px solid rgba(0, 122, 255, 0.14) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .badge,
+html[data-theme='light'] .toolkit-wrapper .icon-wrapper,
+html[data-theme='light'] .docs-page .brand-mark,
+html[data-theme='light'] .docs-page .nav-icon,
+html[data-theme='light'] .docs-page .capacity-progress-fill,
+html[data-theme='light'] .ai-page .welcome-badge,
+html[data-theme='light'] .ai-page .message-avatar,
+html[data-theme='light'] .order-page .goods-avatar,
+html[data-theme='light'] .user-dashboard-wrapper .model-type-tag,
+html[data-theme='light'] .main-container .package-features,
+html[data-theme='light'] .main-container .detail-pay-btn,
+html[data-theme='light'] .main-container .security-footer {
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] .docs-page .capacity-progress-track,
+html[data-theme='light'] .main-container .footer-actions,
+html[data-theme='light'] .order-page .shell-footer,
+html[data-theme='light'] .order-page .shell-header,
+html[data-theme='light'] .order-page .detail-header,
+html[data-theme='light'] .docs-page .workspace-toolbar,
+html[data-theme='light'] .docs-page .workspace-breadcrumb,
+html[data-theme='light'] .docs-page .workspace-pagination,
+html[data-theme='light'] .user-dashboard-wrapper .section-header,
+html[data-theme='light'] .user-dashboard-wrapper .meta-info,
+html[data-theme='light'] .user-dashboard-wrapper .announcement-item,
+html[data-theme='light'] .ai-page .conversation-header,
+html[data-theme='light'] .ai-page .composer-tools,
+html[data-theme='light'] .main-container .card-header {
+  border-color: rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .docs-page .workspace-toolbar,
+html[data-theme='light'] .docs-page .workspace-breadcrumb,
+html[data-theme='light'] .docs-page .workspace-pagination {
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+html[data-theme='light'] .docs-page .file-table-wrapper .el-table,
+html[data-theme='light'] .docs-page .file-table-wrapper .file-name,
+html[data-theme='light'] .docs-page .file-grid-wrapper .file-name,
+html[data-theme='light'] .docs-page .image-timeline-wrapper .image-name,
+html[data-theme='light'] .docs-page .breadcrumb-wrapper,
+html[data-theme='light'] .docs-page .tech-title,
+html[data-theme='light'] .docs-page .el-breadcrumb__inner,
+html[data-theme='light'] .docs-page .el-breadcrumb__inner a,
+html[data-theme='light'] .docs-page .custom-tree-node,
+html[data-theme='light'] .docs-page .target-path .label,
+html[data-theme='light'] .docs-page .file-info-form,
+html[data-theme='light'] .docs-page .file-info-dialog .el-form-item__label,
+html[data-theme='light'] .upload-file-wrapper,
+html[data-theme='light'] .upload-file-wrapper .title-span,
+html[data-theme='light'] .upload-file-wrapper .custom-status,
+html[data-theme='light'] .upload-file-wrapper .text {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .docs-page .file-table-wrapper .file-info,
+html[data-theme='light'] .docs-page .file-table-wrapper .file-size,
+html[data-theme='light'] .docs-page .el-breadcrumb__separator,
+html[data-theme='light'] .docs-page .pagination-copy,
+html[data-theme='light'] .docs-page .no-file,
+html[data-theme='light'] .upload-file-wrapper .uploader-file__status,
+html[data-theme='light'] .right-menu-item a,
+html[data-theme='light'] .file-info-dialog .status-icon {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .ai-page .session-sidebar,
+html[data-theme='light'] .ai-page .conversation-shell {
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+html[data-theme='light'] .ai-page .message-card,
+html[data-theme='light'] .ai-page .streaming-card,
+html[data-theme='light'] .ai-page .welcome-card {
+  background: rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme='light'] .ai-page .user-card {
+  background: rgba(0, 122, 255, 0.08) !important;
+}
+
+html[data-theme='light'] .ai-page .ai-card,
+html[data-theme='light'] .ai-page .streaming-card {
+  border: 1px solid rgba(29, 29, 31, 0.06) !important;
+}
+
+html[data-theme='light'] .ai-page .message-content,
+html[data-theme='light'] .ai-page .message-content *,
+html[data-theme='light'] .ai-page .streaming-card span,
+html[data-theme='light'] .ai-page .header-status,
+html[data-theme='light'] .ai-page .socket-status,
+html[data-theme='light'] .ai-page .status-pill,
+html[data-theme='light'] .ai-page .status-pill * {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .ai-page .status-pill,
+html[data-theme='light'] .ai-page .header-status {
+  background: rgba(0, 122, 255, 0.12) !important;
+  border: 1px solid rgba(0, 122, 255, 0.14) !important;
+}
+
+html[data-theme='light'] .order-page .summary-card,
+html[data-theme='light'] .order-page .order-card,
+html[data-theme='light'] .order-page .detail-card,
+html[data-theme='light'] .order-page .time-node,
+html[data-theme='light'] .order-page .detail-amount {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+html[data-theme='light'] .order-page .summary-card::before,
+html[data-theme='light'] .order-page .summary-card::after,
+html[data-theme='light'] .order-page .order-hero::before,
+html[data-theme='light'] .order-page .order-shell::before {
+  opacity: 0.18 !important;
+}
+
+html[data-theme='light'] .login-view-container {
+  background: linear-gradient(180deg, #eef3fb 0%, #f5f5f7 100%) !important;
+}
+
+html[data-theme='light'] .login-view-container .tech-bg-overlay {
+  opacity: 0.85 !important;
+}
+
+html[data-theme='light'] .login-view-container .login-card-wrapper {
+  animation: none !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid rgba(29, 29, 31, 0.06) !important;
+  box-shadow: 0 20px 54px rgba(15, 23, 42, 0.1) !important;
+}
+
+html[data-theme='light'] .login-view-container .login-title,
+html[data-theme='light'] .login-view-container .tech-form .el-input__icon,
+html[data-theme='light'] .login-view-container .register-btn:hover {
+  color: #1d1d1f !important;
+  text-shadow: none !important;
+}
+
+html[data-theme='light'] .login-view-container .login-subtitle,
+html[data-theme='light'] .login-view-container .register-btn,
+html[data-theme='light'] .login-view-container .captcha-placeholder {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .login-view-container .captcha-img-box {
+  background: rgba(245, 245, 247, 0.96) !important;
+  border-color: rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .user-dashboard-wrapper,
+html[data-theme='light'] .user-dashboard-wrapper .content-split-grid,
+html[data-theme='light'] .user-dashboard-wrapper .side-panel {
+  background: transparent !important;
+}
+
+html[data-theme='light'] .user-dashboard-wrapper .stat-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+html[data-theme='light'] .user-dashboard-wrapper .stat-title {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .user-dashboard-wrapper .recharge-btn {
+  background: #007aff !important;
+}
+
+html[data-theme='light'] .main-container .el-card,
+html[data-theme='light'] .main-container .package-item,
+html[data-theme='light'] .main-container .full-dialog,
+html[data-theme='light'] .main-container .full-dialog .el-dialog__body,
+html[data-theme='light'] .main-container .el-dialog,
+html[data-theme='light'] .main-container .el-dialog__body {
+  background: rgba(255, 255, 255, 0.96) !important;
+}
+
+html[data-theme='light'] .main-container .price,
+html[data-theme='light'] .main-container .footer-actions b {
+  color: #ff453a !important;
+}
+
+html[data-theme='light'] .main-container .tip-box {
+  background: rgba(255, 69, 58, 0.08) !important;
+  color: #d93025 !important;
+}
+
+html[data-theme='light'] .main-container .price-display,
+html[data-theme='light'] .main-container .package-features {
+  color: #007aff !important;
+}
+
+html[data-theme='light'] .main-container .qr-code-box {
+  background: #ffffff !important;
+}
+
+html[data-theme='light'] .main-container .security-footer {
+  color: #007aff !important;
+  border-top: 1px solid rgba(29, 29, 31, 0.06) !important;
+}
+
+html[data-theme='light'] .ice-wrapper,
+html[data-theme='light'] .ice-wrapper .sora-capsule-panel {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .ice-wrapper .vertical-group,
+html[data-theme='light'] .ice-wrapper .floating-toolbar {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+html[data-theme='light'] .ice-wrapper .vertical-group .el-button,
+html[data-theme='light'] .ice-wrapper .modal-type-switcher button,
+html[data-theme='light'] .ice-wrapper .btn-cancel-text {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='dark'] .toolkit-wrapper,
+html[data-theme='dark'] .docs-page,
+html[data-theme='dark'] .ai-page,
+html[data-theme='dark'] .order-page,
+html[data-theme='dark'] .user-dashboard-wrapper,
+html[data-theme='dark'] .main-container,
+html[data-theme='dark'] .ice-wrapper,
+html[data-theme='dark'] .settings-page {
+  color: #f5f5f7 !important;
+}
+
+html[data-theme='dark'] .toolkit-wrapper .header-content h1,
+html[data-theme='dark'] .docs-page .hero-copy h1,
+html[data-theme='dark'] .ai-page .header-copy h1,
+html[data-theme='dark'] .order-page .hero-copy h1,
+html[data-theme='dark'] .user-dashboard-wrapper .user-name,
+html[data-theme='dark'] .main-container .header-title,
+html[data-theme='dark'] .settings-page h1,
+html[data-theme='dark'] .settings-page h2,
+html[data-theme='dark'] .settings-page h3 {
+  color: #f5f5f7 !important;
+  -webkit-text-fill-color: #f5f5f7 !important;
+}
+
+html[data-theme='dark'] .toolkit-wrapper .subtitle,
+html[data-theme='dark'] .docs-page .hero-copy p,
+html[data-theme='dark'] .ai-page .session-preview,
+html[data-theme='dark'] .order-page .hero-desc,
+html[data-theme='dark'] .user-dashboard-wrapper .user-intro,
+html[data-theme='dark'] .main-container .info-group,
+html[data-theme='dark'] .settings-page .hero-desc {
+  color: #a1a1a6 !important;
+}
+
+html[data-theme='dark'] .ai-page .message-content,
+html[data-theme='dark'] .ai-page .message-content *,
+html[data-theme='dark'] .docs-page .file-table-wrapper,
+html[data-theme='dark'] .docs-page .file-grid-wrapper,
+html[data-theme='dark'] .docs-page .image-timeline-wrapper,
+html[data-theme='dark'] .right-menu-list,
+html[data-theme='dark'] .img-preview-wrapper,
+html[data-theme='dark'] .video-preview-wrapper,
+html[data-theme='dark'] .audio-preview-wrapper {
+  color: #f5f5f7 !important;
+}
+
+/* Readability stabilization for light theme */
+html[data-theme='light'] .toolkit-wrapper .tool-card,
+html[data-theme='light'] .docs-page .sidebar-brand,
+html[data-theme='light'] .docs-page .sidebar-panel,
+html[data-theme='light'] .docs-page .workspace-hero,
+html[data-theme='light'] .docs-page .workspace-shell,
+html[data-theme='light'] .docs-page .workspace-toolbar,
+html[data-theme='light'] .docs-page .workspace-breadcrumb,
+html[data-theme='light'] .docs-page .workspace-pagination,
+html[data-theme='light'] .docs-page .file-table-wrapper,
+html[data-theme='light'] .docs-page .file-grid-wrapper,
+html[data-theme='light'] .docs-page .image-timeline-wrapper,
+html[data-theme='light'] .order-page .order-hero,
+html[data-theme='light'] .order-page .order-shell,
+html[data-theme='light'] .ai-page .session-sidebar,
+html[data-theme='light'] .ai-page .conversation-header,
+html[data-theme='light'] .ai-page .conversation-shell,
+html[data-theme='light'] .ai-page .composer-card,
+html[data-theme='light'] .chat-view .chat-sidebar,
+html[data-theme='light'] .chat-view .chat-header,
+html[data-theme='light'] .chat-view .message-scroller,
+html[data-theme='light'] .chat-view .chat-composer,
+html[data-theme='light'] .chat-view .online-lab,
+html[data-theme='light'] .chat-view .contact-section,
+html[data-theme='light'] .chat-view .empty-panel,
+html[data-theme='light'] .chat-view .empty-conversation__card,
+html[data-theme='light'] .login-view-container .login-card-wrapper,
+html[data-theme='light'] .user-dashboard-wrapper .glass-card,
+html[data-theme='light'] .main-container .el-card,
+html[data-theme='light'] .main-container .package-item,
+html[data-theme='light'] .ice-wrapper .floating-toolbar,
+html[data-theme='light'] .ice-wrapper .vertical-group,
+html[data-theme='light'] .upload-file-wrapper,
+html[data-theme='light'] .right-menu-list,
+html[data-theme='light'] .unzip-list,
+html[data-theme='light'] .docs-operation-dropdown {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(29, 29, 31, 0.08) !important;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .header-content h1 {
+  background: none !important;
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .subtitle,
+html[data-theme='light'] .toolkit-wrapper .card-body p,
+html[data-theme='light'] .toolkit-wrapper .tag,
+html[data-theme='light'] .toolkit-wrapper .search-box svg,
+html[data-theme='light'] .toolkit-wrapper .card-body .el-icon-edit-outline,
+html[data-theme='light'] .toolkit-wrapper .card-body .el-icon-folder-opened {
+  color: #667085 !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .card-body h3,
+html[data-theme='light'] .toolkit-wrapper .arrow-icon,
+html[data-theme='light'] .toolkit-wrapper .search-box input,
+html[data-theme='light'] .toolkit-wrapper .search-box input::placeholder {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .search-box input {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(29, 29, 31, 0.12) !important;
+}
+
+html[data-theme='light'] .toolkit-wrapper .tag {
+  background: rgba(0, 122, 255, 0.08) !important;
+  border-color: rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .docs-page .brand-copy h2,
+html[data-theme='light'] .docs-page .panel-title,
+html[data-theme='light'] .docs-page .hero-copy h1,
+html[data-theme='light'] .docs-page .nav-copy strong,
+html[data-theme='light'] .docs-page .capacity-copy h3,
+html[data-theme='light'] .docs-page .capacity-metric strong,
+html[data-theme='light'] .docs-page .hero-stat strong,
+html[data-theme='light'] .docs-page .workspace-toolbar,
+html[data-theme='light'] .docs-page .workspace-breadcrumb,
+html[data-theme='light'] .docs-page .workspace-pagination,
+html[data-theme='light'] .docs-page .file-table-wrapper,
+html[data-theme='light'] .docs-page .file-grid-wrapper,
+html[data-theme='light'] .docs-page .image-timeline-wrapper,
+html[data-theme='light'] .docs-page .file-name,
+html[data-theme='light'] .docs-page .image-name,
+html[data-theme='light'] .docs-page .el-table .cell,
+html[data-theme='light'] .docs-page .el-table th,
+html[data-theme='light'] .docs-page .el-table td,
+html[data-theme='light'] .docs-page .el-pagination,
+html[data-theme='light'] .docs-page .el-pagination *,
+html[data-theme='light'] .docs-page .tech-radio-group,
+html[data-theme='light'] .docs-page .tech-radio-group .el-radio__label,
+html[data-theme='light'] .docs-page .tech-timeline-item .el-timeline-item__timestamp {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .docs-page .brand-copy p,
+html[data-theme='light'] .docs-page .panel-subtitle,
+html[data-theme='light'] .docs-page .hero-copy p,
+html[data-theme='light'] .docs-page .nav-copy small,
+html[data-theme='light'] .docs-page .capacity-note,
+html[data-theme='light'] .docs-page .capacity-metric span,
+html[data-theme='light'] .docs-page .hero-stat span,
+html[data-theme='light'] .docs-page .capacity-status,
+html[data-theme='light'] .docs-page .pagination-copy,
+html[data-theme='light'] .docs-page .breadcrumb-copy,
+html[data-theme='light'] .docs-page .file-info,
+html[data-theme='light'] .docs-page .file-size,
+html[data-theme='light'] .docs-page .no-file,
+html[data-theme='light'] .docs-page .el-breadcrumb__separator,
+html[data-theme='light'] .docs-page .el-breadcrumb__inner,
+html[data-theme='light'] .docs-page .el-breadcrumb__inner a {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .docs-page .file-grid-wrapper .file-item,
+html[data-theme='light'] .docs-page .image-timeline-wrapper .image-item,
+html[data-theme='light'] .docs-page .capacity-card,
+html[data-theme='light'] .docs-page .hero-stat,
+html[data-theme='light'] .docs-page .capacity-metric {
+  background: rgba(247, 248, 250, 0.96) !important;
+  border-color: rgba(29, 29, 31, 0.06) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] .docs-page .file-grid-wrapper .file-item:hover,
+html[data-theme='light'] .docs-page .image-timeline-wrapper .image-item:hover,
+html[data-theme='light'] .docs-page .file-grid-wrapper .tech-active-item {
+  background: rgba(0, 122, 255, 0.08) !important;
+}
+
+html[data-theme='light'] .docs-page .file-grid-wrapper .file-operate,
+html[data-theme='light'] .docs-page .file-table-wrapper .file-operate,
+html[data-theme='light'] .docs-page .file-grid-wrapper .tech-menu-item,
+html[data-theme='light'] .docs-page .right-menu-list,
+html[data-theme='light'] .docs-page .right-menu-list * {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .docs-page .file-grid-wrapper .el-loading-mask,
+html[data-theme='light'] .docs-page .file-table-wrapper .el-loading-mask,
+html[data-theme='light'] .docs-page .image-timeline-wrapper .el-loading-mask {
+  background: rgba(245, 245, 247, 0.72) !important;
+}
+
+html[data-theme='light'] .ai-page .header-copy h1,
+html[data-theme='light'] .ai-page .session-title,
+html[data-theme='light'] .ai-page .summary-line strong,
+html[data-theme='light'] .ai-page .message-role,
+html[data-theme='light'] .ai-page .message-content,
+html[data-theme='light'] .ai-page .message-content *,
+html[data-theme='light'] .ai-page .streaming-card span,
+html[data-theme='light'] .ai-page .welcome-card h2,
+html[data-theme='light'] .ai-page .composer-input,
+html[data-theme='light'] .ai-page .tool-label,
+html[data-theme='light'] .ai-page .file-item,
+html[data-theme='light'] .ai-page .toolbar-select .el-input__inner {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .ai-page .summary-line,
+html[data-theme='light'] .ai-page .session-preview,
+html[data-theme='light'] .ai-page .welcome-kicker,
+html[data-theme='light'] .ai-page .welcome-card p,
+html[data-theme='light'] .ai-page .header-copy p,
+html[data-theme='light'] .ai-page .composer-input::placeholder,
+html[data-theme='light'] .ai-page .toolbar-select .el-input__inner::placeholder {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .ai-page .session-item,
+html[data-theme='light'] .ai-page .sidebar-summary,
+html[data-theme='light'] .ai-page .message-card,
+html[data-theme='light'] .ai-page .streaming-card,
+html[data-theme='light'] .ai-page .welcome-card,
+html[data-theme='light'] .ai-page .file-item {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(29, 29, 31, 0.06) !important;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04) !important;
+}
+
+html[data-theme='light'] .ai-page .user-card {
+  background: rgba(0, 122, 255, 0.08) !important;
+  border-color: rgba(0, 122, 255, 0.1) !important;
+}
+
+html[data-theme='light'] .ai-page .icon-btn,
+html[data-theme='light'] .ai-page .remove-file {
+  color: #4b5563 !important;
+}
+
+html[data-theme='light'] .ai-page .composer-shell {
+  background: linear-gradient(180deg, rgba(245, 245, 247, 0), rgba(245, 245, 247, 0.9) 24%, rgba(245, 245, 247, 0.98)) !important;
+  border-top-color: rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .order-page .hero-copy h1,
+html[data-theme='light'] .order-page .summary-value,
+html[data-theme='light'] .order-page .shell-header h2,
+html[data-theme='light'] .order-page .goods-name,
+html[data-theme='light'] .order-page .amount-value,
+html[data-theme='light'] .order-page .detail-header h3,
+html[data-theme='light'] .order-page .detail-amount strong,
+html[data-theme='light'] .order-page .detail-item b,
+html[data-theme='light'] .order-page .time-value,
+html[data-theme='light'] .order-page .empty-state,
+html[data-theme='light'] .order-page .el-pagination,
+html[data-theme='light'] .order-page .el-pagination * {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .order-page .hero-desc,
+html[data-theme='light'] .order-page .summary-label,
+html[data-theme='light'] .order-page .summary-foot,
+html[data-theme='light'] .order-page .shell-header p,
+html[data-theme='light'] .order-page .shell-meta,
+html[data-theme='light'] .order-page .goods-code,
+html[data-theme='light'] .order-page .amount-label,
+html[data-theme='light'] .order-page .meta-label,
+html[data-theme='light'] .order-page .detail-item span,
+html[data-theme='light'] .order-page .time-label,
+html[data-theme='light'] .order-page .empty-state p {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .order-page .refresh-btn {
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] .chat-view {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .chat-view .chat-view__bg {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(0, 122, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(90, 138, 255, 0.1), transparent 25%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent 50%) !important;
+}
+
+html[data-theme='light'] .chat-view .sidebar-title,
+html[data-theme='light'] .chat-view .section-title,
+html[data-theme='light'] .chat-view .online-user__name,
+html[data-theme='light'] .chat-view .contact-name,
+html[data-theme='light'] .chat-view .chat-peer__name,
+html[data-theme='light'] .chat-view .message-bubble.other,
+html[data-theme='light'] .chat-view .message-meta,
+html[data-theme='light'] .chat-view .empty-panel h3,
+html[data-theme='light'] .chat-view .empty-conversation__card h4,
+html[data-theme='light'] .chat-view .chat-textarea .el-textarea__inner,
+html[data-theme='light'] .chat-view .chat-input .el-input__inner {
+  color: #1d1d1f !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html[data-theme='light'] .chat-view .sidebar-kicker,
+html[data-theme='light'] .chat-view .section-kicker,
+html[data-theme='light'] .chat-view .online-lab__row,
+html[data-theme='light'] .chat-view .online-user__intro,
+html[data-theme='light'] .chat-view .contact-time,
+html[data-theme='light'] .chat-view .contact-preview,
+html[data-theme='light'] .chat-view .chat-peer__status,
+html[data-theme='light'] .chat-view .empty-panel p,
+html[data-theme='light'] .chat-view .empty-conversation__card p,
+html[data-theme='light'] .chat-view .chat-composer__hint,
+html[data-theme='light'] .chat-view .history-hint.muted {
+  color: #6f7480 !important;
+}
+
+html[data-theme='light'] .chat-view .status-pill,
+html[data-theme='light'] .chat-view .online-user,
+html[data-theme='light'] .chat-view .contact-card,
+html[data-theme='light'] .chat-view .message-bubble.other,
+html[data-theme='light'] .chat-view .online-lab__meta {
+  background: rgba(247, 248, 250, 0.96) !important;
+  border-color: rgba(29, 29, 31, 0.08) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] .chat-view .message-bubble.self {
+  box-shadow: 0 12px 24px rgba(0, 122, 255, 0.12) !important;
+}
+
+html[data-theme='light'] .chat-view .message-scroller {
+  background: rgba(245, 245, 247, 0.72) !important;
+}
+
+html[data-theme='light'] .chat-view .chat-banner {
+  border-left-color: rgba(29, 29, 31, 0.08) !important;
+  border-right-color: rgba(29, 29, 31, 0.08) !important;
+}
+
+html[data-theme='light'] .chat-view .chat-input .el-input__inner,
+html[data-theme='light'] .chat-view .chat-textarea .el-textarea__inner {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(29, 29, 31, 0.1) !important;
+}
+
+html[data-theme='light'] .chat-view .chat-input .el-input__inner::placeholder,
+html[data-theme='light'] .chat-view .chat-textarea .el-textarea__inner::placeholder {
+  color: #86868b !important;
+}
+
+html[data-theme='light'] .upload-file-wrapper,
+html[data-theme='light'] .upload-file-wrapper *,
+html[data-theme='light'] .right-menu-list,
+html[data-theme='light'] .right-menu-list *,
+html[data-theme='light'] .img-preview-wrapper,
+html[data-theme='light'] .img-preview-wrapper *,
+html[data-theme='light'] .video-preview-wrapper,
+html[data-theme='light'] .video-preview-wrapper *,
+html[data-theme='light'] .audio-preview-wrapper,
+html[data-theme='light'] .audio-preview-wrapper *,
+html[data-theme='light'] .el-dialog-div,
+html[data-theme='light'] .el-dialog-div *,
+html[data-theme='light'] .file-info-dialog,
+html[data-theme='light'] .file-info-dialog * {
+  color: #1d1d1f !important;
+}
+
+html[data-theme='light'] .upload-file-wrapper .uploader-file__status,
+html[data-theme='light'] .right-menu-item a,
+html[data-theme='light'] .target-path .label,
+html[data-theme='light'] .file-info-form .el-form-item__label {
+  color: #6f7480 !important;
+}

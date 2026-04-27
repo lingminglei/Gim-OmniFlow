@@ -1,0 +1,16 @@
+.git
+.idea
+.env
+.mvn/wrapper/maven-wrapper.jar
+target
+gim-ai-service/target
+gim-api-service/target
+gim-app-service/target
+gim-common-service/target
+gim-gateway-service/target
+upload
+docker-data
+nullwebSocket
+lib
+*.iml
+*.log

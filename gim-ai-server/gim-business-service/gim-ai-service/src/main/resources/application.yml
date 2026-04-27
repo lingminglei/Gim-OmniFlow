@@ -1,0 +1,29 @@
+﻿server:
+  port: 9877
+spring:
+  application:
+    name: gim-ai-service
+  config:
+    import: classpath:ai-models-config.yml
+api:
+  comfy:
+    url: http://127.0.0.1:8000
+  sora:
+    url: https://api.sora2api.ai
+    key: 111111
+    callback-url: https://api.example.com/callback
+
+dubbo:
+  application:
+    name: gim-ai-service
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://113.44.141.222:8848
+    parameters:
+      namespace: 6af1a3f3-fc81-42e9-976c-6520a1bc7775
+  provider:
+    timeout: 5000
+    retries: 0
+

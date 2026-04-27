@@ -1,0 +1,43 @@
+package org.lml.common.constant;
+
+/**
+ * Redis 缓存常量类
+ */
+public class RedisCacheConstant {
+
+    /**
+     * 用户注册分布式锁
+     */
+    public static final String LOCK_USER_REGISTER_KEY = "suts:lock_user-register:";
+
+    /**
+     * 用户登陆key
+     */
+    public static final String USER_LOGIN_KEY = "suts:login:";
+
+    /**
+     * 用户登陆key
+     */
+    public static final String USER_LOGIN_KEY_USER_TO_TOKEN = "suts:login:UserToToken:";
+    public static final String USER_LOGIN_KEY_TOKEN_TO_USER = "suts:login:TokenToUser:";
+
+    /**
+     * 图片分析的结果
+     */
+    public static final String PICTURE_ANALYSIS_RESPONSE_KEY = "suts:picture:analysis:%s";
+
+    /**
+     * 任务执行状态
+     */
+    public static final String PICTURE_RESPONSE_KEY = "biz:task:info:";
+
+    /**
+     * 用户支付-token前缀
+     */
+    public static final String PAY_TOKEN_INFO = "biz:pay:tokenInfo:";
+
+    /**
+     * 用户支付-token 过期时长
+     */
+    public static final Integer PAY_TOKEN_INFO_TIME = 10*60;
+}

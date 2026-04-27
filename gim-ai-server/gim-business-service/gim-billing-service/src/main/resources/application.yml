@@ -1,0 +1,77 @@
+server:
+  port: 5678
+
+spring:
+  application:
+    name: gim-billing-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://47.120.60.61:3306/g-im-chat?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai}
+    username: ${SPRING_DATASOURCE_USERNAME:gimchat}
+    password: ${SPRING_DATASOURCE_PASSWORD:LMLlml062424}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: ${SPRING_REDIS_HOST:47.120.60.61}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:123456}
+    timeout: 60000
+    redisson:
+      config: |
+        singleServerConfig:
+          idleConnectionTimeout: 10000
+          connectTimeout: 10000
+          timeout: 3000
+          retryAttempts: 3
+          retryInterval: 1500
+          address: "redis://${SPRING_REDIS_HOST:47.120.60.61}:${SPRING_REDIS_PORT:6379}"
+          password: "${SPRING_REDIS_PASSWORD:123456}"
+          database: 0
+        threads: 8
+        nettyThreads: 16
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        transportMode: "NIO"
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      db-type: mysql
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    db:
+      enabled: false
+
+dubbo:
+  application:
+    name: gim-billing-service
+    register-mode: interface
+    serialize-check-status: WARN
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://${NACOS_SERVER_ADDR:113.44.141.222:8848}
+    parameters:
+      namespace: ${NACOS_NAMESPACE:6af1a3f3-fc81-42e9-976c-6520a1bc7775}
+  provider:
+    timeout: 5000
+    retries: 0
+    serialization: hessian2
+  consumer:
+    check: false
+    timeout: 5000
+    retries: 0
+    serialization: hessian2
+
+billing:
+  compensation:
+    scan-interval-ms: 60000

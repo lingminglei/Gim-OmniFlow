@@ -1,0 +1,276 @@
+﻿server:
+  port: 9875
+  tomcat:
+    max-swallow-size: -1   # 允许大包
+
+file:
+  path: E:/upload/
+#  path: "/opt/gimBoot/file"
+
+aiVideo:
+  path: E:/file/aiVideo
+#  path: /opt/upload/
+
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:113.44.141.222:8848}
+        namespace: ${NACOS_NAMESPACE:6af1a3f3-fc81-42e9-976c-6520a1bc7775}
+        service: gim-app-service
+        register-enabled: true
+    # 1. 定义函数入口名单，必须包含所有需要 MQ 通信的 Bean 名称。
+    function:
+      definition: imageGenerationTask;aiCreativeTaskQuery;soraCreativeTask;soraTaskQueryConsumer;payCancelConsumer;rechargeCreditConsumer;myNormalTask
+
+    stream:
+      # 2. 抽取全局默认配置，切换中间件时只需修改 binder 和对应中间件配置。
+      default:
+        binder: rocketmq
+        content-type: application/json
+
+      # 3. 逻辑绑定，声明 Topic 和 Group，格式为：方法名-in-0。
+      bindings:
+        # --- 创作提交链路 ---
+        imageGenerationTask-in-0: # 文生图提交
+          destination: topic-ai-image-submit
+          group: group-image-processor
+        soraCreativeTask-in-0: # Sora 视频提交
+          destination: topic-ai-sora-submit
+          group: group-sora-processor
+
+        # --- 结果查询链路 ---
+        aiCreativeTaskQuery-in-0: # 文生图查询
+          destination: topic-ai-image-query
+          group: group-image-query-processor
+        soraTaskQueryConsumer-in-0: # Sora 视频查询
+          destination: topic-ai-sora-query
+          group: group-sora-query-processor
+        payCancelConsumer-in-0: # 支付取消回滚
+          destination: topic-pay-cancel
+          group: group-pay-cancel-processor
+        rechargeCreditConsumer-in-0: # 充值积分到账
+          destination: topic-pay-recharge-credit
+          group: group-pay-recharge-credit-processor
+        payCancelProducer-out-0:
+          destination: topic-pay-cancel
+        rechargeCreditProducer-out-0:
+          destination: topic-pay-recharge-credit
+      # 4. RocketMQ 特有底层配置
+      rocketmq:
+        # 设置连接集群的物理信息。
+        binder:
+          name-server: 43.140.198.96:9876 # 替换为你的 RocketMQ NameServer 地址，多个节点用分号隔开。
+          # producer 相关的全局通用配置
+          producer:
+            retry-times-when-send-failed: 3
+        # 设置特定业务流的特殊属性。
+        bindings:
+          # 事务消息必须显式开启 Trans 类型并关联监听器 Bean 名称。
+          myTransTask-out-0:
+            producer:
+              producerType: Trans
+              transactionListener: myTransactionListenerBean
+          # 非事务消息无需在此处配置，直接继承 default 设置即可。
+  websocket:
+    max-text-message-size: 1048576
+    max-binary-message-size: 1048576
+  config:
+    import: classpath:ai-models-config.yml
+#  kafka:
+#    bootstrap-servers: 113.44.141.222:9092  # Kafka 外网 IP
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    consumer:
+#      group-id: test-group
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#    listener:
+#      # 将确认模式改为手动。
+#      # MANUAL：该模式下，处理完一批数据后由监听器手动调用 ack.acknowledge()。
+#      ack-mode: manual
+#      missing-topics-fatal: false # 如果 topic 不存在，启动不报错。
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: gim-app-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+    url: jdbc:mysql://47.120.60.61:3306/g-im-chat?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: gimchat
+    password: LMLlml062424
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 47.120.60.61
+    port: 6379
+    timeout: 60000
+    redisson:
+      config: |
+        singleServerConfig:
+          idleConnectionTimeout: 10000
+          connectTimeout: 10000
+          timeout: 3000
+          retryAttempts: 3
+          retryInterval: 1500
+          password: 123456  # 首次启动前务必改成你自己的密码。
+          subscriptionsPerConnection: 5
+          clientName: null
+          address: "redis://47.120.60.61:6379"   # 首次启动前务必改成你自己的 Redis 地址。
+          subscriptionConnectionMinimumIdleSize: 1
+          subscriptionConnectionPoolSize: 50
+          connectionMinimumIdleSize: 24
+          connectionPoolSize: 64
+          database: 0
+          dnsMonitoringInterval: 5000
+        threads: 16
+        nettyThreads: 32
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        transportMode: "NIO"
+    jedis:
+      pool:
+        min-idle: 10 # 连接池中的最小空闲连接
+        max-idle: 50 # 连接池中的最大空闲连接
+        max-active: 200 # 连接池最大连接数，使用负值表示没有限制
+        max-wait: -1 # 连接池最大阻塞等待时间，使用负值表示没有限制
+    password: '123456'
+
+    # 打开 SQL 输出日志
+    props:
+      sql:
+        show: true
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: NOT_EMPTY
+      #?????
+      db-type: MYSQL
+  configuration:
+#     ????
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#绂佺敤鏁版嵁婧愬仴搴锋鏌?
+management:
+  health:
+    db:
+      enabled: false
+
+#jetcache:
+#  statIntervalMinutes: 1        # 设置统计信息收集时间间隔为 1 分钟
+#  areaInCacheName: false        # 禁用在缓存名称中包含区域名称
+#  local:
+#    default:
+#      type: caffeine            # 使用 Caffeine 作为本地缓存实现
+#      keyConvertor: fastjson2   # 使用 Fastjson2 进行键转换
+#  remote:
+#    default:
+#      type: redisson            # 使用 Redisson 作为远程缓存实现
+#      keyConvertor: fastjson2   # 使用 Fastjson2 进行键转换
+#      broadcastChannel: jd-registration  # 广播频道名称设置为 Spring 应用程序名称
+#      keyPrefix: jd-registration        # 键前缀设置为 Spring 应用程序名称
+#      valueEncoder: java        # 使用 Java 进行值编码
+#      valueDecoder: java        # 使用 Java 进行值解码
+#      defaultExpireInMillis: 5000  # 设置默认过期时间为 5000 毫秒
+
+
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: demo
+      model-name: gpt-4o-mini
+      log-requests: true
+      log-responses: true
+
+qdrant:
+#  url: "192.168.43.130"
+  url: "113.44.141.222"
+  port: 6334
+  file-path: "D://AgentStorePath"
+#  file-path: "/qdrant/storage"
+  embedding-model-name: "text-embedding-3-small"
+
+uiuiapi:
+  apiKey: sk-GKWtmZ6Uvl57o4kUoQ2Td9w73MJvnTPF5FBgmxYYA43BxH0u
+  baseUrl: https://sg.uiuiapi.com/v1
+
+ufop:
+  storage-type: 0
+  local-storage-path: "D://fileStoragepPath"
+#  local-storage-path: "/opt/gimBoot/file"
+
+user:
+ id: "111"
+
+############## Sa-Token 配置 ##############
+sa-token:
+  # token 名称，同时也是 cookie 名称
+  token-name: satoken
+  # token 有效期，单位秒，默认 30 天，-1 代表永久有效
+  timeout: 2592000
+  # token 最低活跃频率，单位秒；超过该时间未访问系统会被冻结，默认 -1 表示不限制
+  active-timeout: -1
+  # 是否允许同一账号多地同时登录；true 允许一起登录，false 新登录会挤掉旧登录
+  is-concurrent: true
+  # 多人登录同一账号时，是否共用同一个 token；true 共用，false 每次登录新建 token
+  is-share: false
+  # token 风格，可取值：uuid、simple-uuid、random-32、random-64、random-128、tik
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true
+
+BaiDuOcr:
+  APPID: 7008146
+  APIKey: "zISmcIFKlnt7JKD5o41aziqn"
+  SecretKey: "RhnQmCsROdaqdmKqZd7KY0TP6Mr6JJEb"
+
+ftp:
+  host: 47.120.60.61
+  port: 21
+  user: lingminglei
+  password: LMLlml062424
+  fileName: "TD-533A120250+CFile1.xlsx"
+
+
+app:
+  kafka:
+    topics:
+      external-api: external-api-topic  # 鐢熶骇鐜鍚嶅瓧
+      ai-tasks: ai-media-tasks-prod
+
+minio:
+  endpoint: http://47.120.60.61:9000
+  accessKey: admin
+  secretKey: minio123456
+  bucketName: gimchat
+
+dubbo:
+  application:
+    # 允许自动根据项目中的类生成白名单
+    serialize-check-status: WARN
+    name: gim-app-dubbo-service
+    register-mode: interface
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://113.44.141.222:8848
+    parameters:
+      namespace: 6af1a3f3-fc81-42e9-976c-6520a1bc7775
+  consumer:
+    check: false
+    timeout: 5000
+    retries: 0
+    serialization: hessian2
+  provider:
+    serialization: hessian2

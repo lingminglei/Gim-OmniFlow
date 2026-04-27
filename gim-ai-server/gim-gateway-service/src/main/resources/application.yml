@@ -1,0 +1,61 @@
+server:
+  port: 9876
+
+spring:
+  application:
+    name: gim-gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:113.44.141.222:8848}
+        namespace: ${NACOS_NAMESPACE:6af1a3f3-fc81-42e9-976c-6520a1bc7775}
+        service: gim-gateway-service
+    sentinel:
+      eager: true
+      filter:
+        enabled: false
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:127.0.0.1:8858}
+        port: ${SENTINEL_TRANSPORT_PORT:8719}
+      scg:
+        fallback:
+          mode: response
+  redis:
+    host: ${REDIS_HOST:47.120.60.61}
+    port: ${REDIS_PORT:6379}
+    timeout: 60000
+    password: ${REDIS_PASSWORD:123456}
+
+sa-token:
+  token-name: satoken
+  timeout: 2592000
+  active-timeout: -1
+  is-concurrent: true
+  is-share: false
+  token-style: uuid
+  is-log: true
+
+gateway:
+  route:
+    service-id: gim-app-service
+  rate-limit:
+    default-count: 120
+    default-interval-seconds: 1
+    login-count: 20
+    login-interval-seconds: 1
+    ai-video-count: 10
+    ai-video-interval-seconds: 1
+    api-count: 40
+    api-interval-seconds: 1
+    chat-ws-count: 30
+    chat-ws-interval-seconds: 1
+    video-ws-count: 15
+    video-ws-interval-seconds: 1
+  log:
+    body-max-length: 2048
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

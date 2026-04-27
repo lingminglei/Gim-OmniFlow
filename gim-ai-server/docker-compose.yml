@@ -1,0 +1,117 @@
+name: gim-ai-server
+
+x-service-defaults: &service-defaults
+  restart: unless-stopped
+  networks:
+    - gim-network
+  environment:
+    TZ: Asia/Shanghai
+
+services:
+  gim-ai-service:
+    <<: *service-defaults
+    image: gim-ai-service:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_MODULE: gim-ai-service
+    ports:
+      - "9877:9877"
+    command:
+      - "--dubbo.registry.address=${DUBBO_REGISTRY_ADDRESS:-nacos://113.44.141.222:8848}"
+      - "--dubbo.registry.parameters.namespace=${NACOS_NAMESPACE:-6af1a3f3-fc81-42e9-976c-6520a1bc7775}"
+      - "--api.comfy.url=${AI_COMFY_URL:-http://127.0.0.1:8000}"
+      - "--api.sora.url=${AI_SORA_URL:-https://api.sora2api.ai}"
+      - "--api.sora.key=${AI_SORA_KEY:-}"
+      - "--api.sora.callback-url=${AI_SORA_CALLBACK_URL:-https://api.example.com/callback}"
+
+  gim-app-service:
+    <<: *service-defaults
+    image: gim-app-service:local
+    depends_on:
+      - gim-ai-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_MODULE: gim-app-service
+    ports:
+      - "9875:9875"
+    environment:
+      TZ: Asia/Shanghai
+      SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL:-jdbc:mysql://47.120.60.61:3306/g-im-chat?useUnicode=true&characterEncoding=utf8&useSSL=false}"
+      SPRING_DATASOURCE_USERNAME: "${SPRING_DATASOURCE_USERNAME:-gimchat}"
+      SPRING_DATASOURCE_PASSWORD: "${SPRING_DATASOURCE_PASSWORD:-LMLlml062424}"
+      SPRING_REDIS_HOST: "${SPRING_REDIS_HOST:-47.120.60.61}"
+      SPRING_REDIS_PORT: "${SPRING_REDIS_PORT:-6379}"
+      SPRING_REDIS_PASSWORD: "${SPRING_REDIS_PASSWORD:-123456}"
+      SPRING_REDIS_REDISSON_CONFIG: |-
+        singleServerConfig:
+          idleConnectionTimeout: 10000
+          connectTimeout: 10000
+          timeout: 3000
+          retryAttempts: 3
+          retryInterval: 1500
+          password: ${SPRING_REDIS_PASSWORD:-123456}
+          subscriptionsPerConnection: 5
+          clientName: null
+          address: "redis://${SPRING_REDIS_HOST:-47.120.60.61}:${SPRING_REDIS_PORT:-6379}"
+          subscriptionConnectionMinimumIdleSize: 1
+          subscriptionConnectionPoolSize: 50
+          connectionMinimumIdleSize: 24
+          connectionPoolSize: 64
+          database: 0
+          dnsMonitoringInterval: 5000
+        threads: 16
+        nettyThreads: 32
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        transportMode: "NIO"
+    volumes:
+      - ./docker-data/app-file:/data/file-root
+      - ./docker-data/ai-video:/data/ai-video
+      - ./docker-data/qdrant-cache:/data/qdrant
+    command:
+      - "--spring.cloud.nacos.discovery.server-addr=${NACOS_SERVER_ADDR:-113.44.141.222:8848}"
+      - "--spring.cloud.nacos.discovery.namespace=${NACOS_NAMESPACE:-6af1a3f3-fc81-42e9-976c-6520a1bc7775}"
+      - "--dubbo.registry.address=${DUBBO_REGISTRY_ADDRESS:-nacos://113.44.141.222:8848}"
+      - "--dubbo.registry.parameters.namespace=${NACOS_NAMESPACE:-6af1a3f3-fc81-42e9-976c-6520a1bc7775}"
+      - "--spring.cloud.stream.rocketmq.binder.name-server=${SPRING_CLOUD_STREAM_ROCKETMQ_BINDER_NAME_SERVER:-43.140.198.96:9876}"
+      - "--minio.endpoint=${MINIO_ENDPOINT:-http://47.120.60.61:9000}"
+      - "--minio.accessKey=${MINIO_ACCESS_KEY:-admin}"
+      - "--minio.secretKey=${MINIO_SECRET_KEY:-minio123456}"
+      - "--minio.bucketName=${MINIO_BUCKET_NAME:-gimchat}"
+      - "--qdrant.url=${QDRANT_URL:-113.44.141.222}"
+      - "--qdrant.port=${QDRANT_PORT:-6334}"
+      - "--qdrant.embedding-model-name=${QDRANT_EMBEDDING_MODEL_NAME:-text-embedding-3-small}"
+      - "--qdrant.file-path=/data/qdrant"
+      - "--uiuiapi.apiKey=${UIUIAPI_API_KEY:-sk-GKWtmZ6Uvl57o4kUoQ2Td9w73MJvnTPF5FBgmxYYA43BxH0u}"
+      - "--uiuiapi.baseUrl=${UIUIAPI_BASE_URL:-https://sg.uiuiapi.com/v1}"
+      - "--file.path=/data/file-root/"
+      - "--ufop.local-storage-path=/data/file-root"
+      - "--aiVideo.path=/data/ai-video"
+
+  gim-gateway-service:
+    <<: *service-defaults
+    image: gim-gateway-service:local
+    depends_on:
+      - gim-app-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVICE_MODULE: gim-gateway-service
+    ports:
+      - "9876:9876"
+    command:
+      - "--spring.cloud.nacos.discovery.server-addr=${NACOS_SERVER_ADDR:-113.44.141.222:8848}"
+      - "--spring.cloud.nacos.discovery.namespace=${NACOS_NAMESPACE:-6af1a3f3-fc81-42e9-976c-6520a1bc7775}"
+      - "--spring.redis.host=${REDIS_HOST:-47.120.60.61}"
+      - "--spring.redis.port=${REDIS_PORT:-6379}"
+      - "--spring.redis.password=${REDIS_PASSWORD:-123456}"
+      - "--spring.cloud.sentinel.transport.dashboard=${SENTINEL_DASHBOARD:-127.0.0.1:8858}"
+      - "--spring.cloud.sentinel.transport.port=${SENTINEL_TRANSPORT_PORT:-8719}"
+
+networks:
+  gim-network:
+    driver: bridge

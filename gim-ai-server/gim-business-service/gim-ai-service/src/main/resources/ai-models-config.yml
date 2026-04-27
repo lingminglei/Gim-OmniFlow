@@ -1,0 +1,77 @@
+ai:
+  models:
+    configs:
+      gpt-4-1:
+        api-key: sk-GKWtmZ6Uvl57o4kUoQ2Td9w73MJvnTPF5FBgmxYYA43BxH0u
+        base-url: https://sg.uiuiapi.com/v1
+        model-name: gpt-4.1
+        temperature: 0.3
+        max-tokens: 2048
+        description: "高性价比的通用对话模型，擅长快速问答、文本生成、以及代码辅助。"
+
+      kimi:
+        api-key: sk-LYzOH9i1MjfIUIUZpGgywESSaA5C6PPODzNqh9y6JIe4CzTw
+        base-url: https://api.moonshot.cn/v1
+        model-name: kimi-k2-0905-preview
+        temperature: 0.3
+        max-tokens: 2048
+        description: "专精于长文本处理和高效阅读理解，能够处理超大上下文窗口的输入并进行精确总结。"
+
+      deepSeekChat:
+        api-key: sk-6b1a8266719c40869ae8c42d6ceaafea
+        base-url: https://api.deepseek.com
+        model-name: deepseek-chat
+        temperature: 0.3
+        max-tokens: 2048
+        description: "性能平衡的通用对话模型，在中文理解和常识推理方面表现优秀，适合基础问答和创意写作。"
+
+      deepSeekReasoner:
+        api-key: sk-6b1a8266719c40869ae8c42d6ceaafea
+        base-url: https://api.deepseek.com
+        model-name: deepseek-reasoner
+        temperature: 0.3
+        max-tokens: 2048
+        description: "强大的逻辑推理和复杂问题解决模型，适用于数学、编程和严谨的逻辑分析任务。"
+      # --- 新增的本地 Ollama 模型 ---
+      localOllama:
+        api-key: ollama # Ollama 不需要真实的 key，但工厂类通常校验非空，填 ollama 即可
+        base-url: http://localhost:11434/v1
+        model-name: MFDoom/deepseek-r1-tool-calling:8b
+        temperature: 0.3 # 建议保持 0.3，输出更稳定，避免格式混乱
+        max-tokens: 8192 # 本地模型可以适当放宽 token 限制
+        description: "本地运行的 Qwen2.5 7B 模型，支持 Tool Calling，响应极快且稳定。"
+      # 新增的 gpt-oss:20b 配置
+      localGptOss:
+        api-key: ollama
+        base-url: http://localhost:11434/v1
+        model-name: gpt-oss:20b
+        temperature: 0.5
+        max-tokens: 8192
+        description: "本地运行的 GPT-OSS 20B 模型，参数量更大，逻辑推理能力更强。"
+      # 新增的 Qwen2.5 7B 配置（国产之光，中文能力极强）
+      localQwen7b:
+        api-key: ollama
+        base-url: http://localhost:11434/v1
+        model-name: qwen2.5:7b
+        temperature: 0.3
+        max-tokens: 8192
+        description: "通义千问 2.5 7B 模型，中文处理能力极其出色，适合代码编写和日常办公辅助。"
+      # 新增的 Gemma3 4B 配置（Google 最新架构，多模态且响应极快）
+      localGemma3:
+        api-key: ollama
+        base-url: http://localhost:11434/v1
+        model-name: gemma3:4b
+        temperature: 0.4
+        max-tokens: 4096
+        description: "Google Gemma3 4B 轻量级模型，架构先进，适合低延迟对话和简单的逻辑任务。"
+      localGemma4_26b:
+        api-key: ollama
+        base-url: http://localhost:11434/v1
+        model-name: gemma4:26b  # 确保你已经运行了 ollama pull gemma4:26b
+        temperature: 0.4
+        # 26B (Q4量化) 约占 14.5GB 显存。
+        # 剩余约 1.5GB 显存建议将上下文限制在 8192 以保证稳定性。
+        # 如果你下载的是 q3_K_M 版本，这里可以开到 32768。
+        max-tokens: 8192
+        description: "Gemma 4 26B A4B 模型。原生多模态 MoE 架构，推理速度极快，16GB 显存建议开启 8K-16K 上下文以获得最佳稳定性。"
+

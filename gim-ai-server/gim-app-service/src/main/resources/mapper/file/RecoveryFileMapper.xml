@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lml.mapper.file.RecoveryFileMapper">
+    <select id="selectRecoveryFileList" resultType="org.lml.entity.dto.file.RecoveryFileListVo">
+        SELECT * FROM recovery_file a
+                          LEFT JOIN user_file b ON a.user_file_id = b.user_file_id
+                          left join file c on c.file_id = b.file_id
+        WHERE user_id = #{userId}
+    </select>
+</mapper>
